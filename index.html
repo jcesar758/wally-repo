@@ -6,26 +6,107 @@
   <title>🏆 Retos y Campeonatos Amix - Wally</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 4px 15px rgba(0,0,0,0.4); }
+      50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), 0 4px 15px rgba(0,0,0,0.4); }
+    }
+    
+    @keyframes shimmer {
+      0% { background-position: -1000px 0; }
+      100% { background-position: 1000px 0; }
+    }
+    
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #0f172a, #1e2937);
+      background-image: url('https://i.imgur.com/7Q8Z9kJ.png');
+      background-size: cover;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      background-position: center;
       color: #e2e8f0;
       min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
     }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.3);
+      pointer-events: none;
+      z-index: 1;
+    }
+    
     header {
-      background: linear-gradient(135deg, #1e40af, #3b82f6);
-      padding: 20px;
+      background: linear-gradient(135deg, rgba(30, 64, 175, 0.95), rgba(59, 130, 246, 0.95));
+      padding: 30px 20px;
       text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
+      animation: slideInLeft 0.8s ease-out;
+      position: relative;
+      z-index: 2;
+      border-bottom: 3px solid #fbbf24;
     }
-    .container { max-width: 1100px; margin: 20px auto; padding: 0 15px; }
+    
+    header h1 {
+      font-size: 2.5em;
+      text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+      animation: pulse 3s ease-in-out infinite;
+      margin-bottom: 10px;
+    }
+    
+    header h2 {
+      font-size: 1.3em;
+      color: #fbbf24;
+      text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+    }
+    
+    .container { 
+      max-width: 1100px; 
+      margin: 20px auto; 
+      padding: 0 15px;
+      position: relative;
+      z-index: 2;
+    }
+    
     .card {
-      background: #1e2937;
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
       border-radius: 16px;
       padding: 25px;
       margin: 15px 0;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+      animation: fadeIn 0.6s ease-out;
+      border: 2px solid rgba(59, 130, 246, 0.2);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
     }
+    
+    .card:hover {
+      animation: glow 2s ease-in-out infinite;
+      border-color: rgba(59, 130, 246, 0.5);
+      transform: translateY(-5px);
+    }
+    
     button {
       padding: 14px 20px;
       margin: 6px;
@@ -35,35 +116,113 @@
       cursor: pointer;
       font-weight: bold;
       transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
-    button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
-    .btn-primary { background: #3b82f6; color: white; }
-    .btn-primary:hover { background: #1e40af; }
-    .btn-success { background: #22c55e; color: white; }
-    .btn-success:hover { background: #16a34a; }
-    .btn-danger { background: #ef4444; color: white; }
-    .btn-danger:hover { background: #dc2626; }
+    
+    button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    button:active::before {
+      width: 300px;
+      height: 300px;
+    }
+    
+    button:hover { 
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+    
+    .btn-primary { 
+      background: linear-gradient(135deg, #3b82f6, #1e40af);
+      color: white;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+    
+    .btn-primary:hover { 
+      background: linear-gradient(135deg, #1e40af, #1e3a8a);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+    }
+    
+    .btn-success { 
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: white;
+      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+    }
+    
+    .btn-success:hover { 
+      background: linear-gradient(135deg, #16a34a, #15803d);
+      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.6);
+    }
+    
+    .btn-danger { 
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
+    }
+    
+    .btn-danger:hover { 
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+    }
 
-    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-    th, td { padding: 14px; text-align: center; border-bottom: 1px solid #334155; }
-    th { background: #1e40af; font-weight: bold; }
+    table { 
+      width: 100%; 
+      border-collapse: collapse; 
+      margin-top: 10px;
+      animation: fadeIn 0.8s ease-out;
+    }
+    
+    th, td { 
+      padding: 14px; 
+      text-align: center; 
+      border-bottom: 1px solid #334155;
+      transition: all 0.3s ease;
+    }
+    
+    th { 
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      font-weight: bold;
+      text-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+    }
+    
     td:first-child { text-align: left; padding-left: 20px; }
-    tr:hover { background: #0f172a; }
+    
+    tr:hover { 
+      background: rgba(59, 130, 246, 0.2);
+      transform: scale(1.02);
+    }
+    
     input[type="text"], input[type="number"] { 
       padding: 10px; 
       border-radius: 6px; 
-      border: 1px solid #475569;
-      background: #0f172a;
+      border: 2px solid #475569;
+      background: rgba(15, 23, 42, 0.8);
       color: #e2e8f0;
       font-size: 14px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
     }
+    
     input[type="text"]:focus, input[type="number"]:focus {
       outline: none;
       border-color: #3b82f6;
-      background: #1e293b;
+      background: rgba(30, 41, 59, 0.9);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
     }
+    
     .partido-card {
-      background: #0f172a;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
       padding: 15px;
       margin: 10px 0;
       border-radius: 8px;
@@ -71,30 +230,62 @@
       justify-content: space-between;
       align-items: center;
       gap: 10px;
+      border: 2px solid rgba(59, 130, 246, 0.2);
+      animation: slideInLeft 0.5s ease-out;
+      transition: all 0.3s ease;
     }
+    
+    .partido-card:hover {
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+      transform: translateX(10px);
+    }
+    
     .partido-resultado {
-      background: #22c55e;
-      padding: 8px 12px;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      padding: 10px 15px;
       border-radius: 6px;
       font-weight: bold;
+      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+      animation: pulse 2s ease-in-out infinite;
     }
+    
     ul { list-style: none; margin: 15px 0; }
+    
     li { 
       padding: 10px; 
       margin: 8px 0; 
-      background: #0f172a; 
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8));
       border-radius: 6px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      animation: fadeIn 0.5s ease-out;
+      transition: all 0.3s ease;
     }
+    
+    li:hover {
+      border-color: rgba(59, 130, 246, 0.5);
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+    }
+    
     .jornada-titulo {
-      background: #1e40af;
+      background: linear-gradient(135deg, rgba(30, 64, 175, 0.9), rgba(59, 130, 246, 0.9));
       padding: 12px;
       margin: 20px 0 10px 0;
       border-radius: 6px;
       font-weight: bold;
       font-size: 16px;
+      text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+      animation: fadeIn 0.6s ease-out;
+      border-left: 4px solid #fbbf24;
+    }
+    
+    h2 {
+      color: #fbbf24;
+      text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
+      animation: fadeIn 0.6s ease-out;
     }
   </style>
 </head>
@@ -206,7 +397,6 @@
 
       torneo = { nombre, equipos: [], partidos: [] };
       
-      // Crear equipos vacíos
       for (let i = 0; i < numEquipos; i++) {
         torneo.equipos.push({nombre: `Equipo ${i+1}`, pj:0, pg:0, pp:0, pf:0, pc:0, puntos:0});
       }
@@ -267,7 +457,6 @@
         return;
       }
       
-      // Generar todos los partidos posibles (ida y vuelta)
       let partidosPosibles = [];
       const eq = torneo.equipos;
       
@@ -279,7 +468,6 @@
         }
       }
       
-      // Barajar y organizar los partidos
       torneo.partidos = organizarFixtureMezclado(partidosPosibles);
       
       guardar();
@@ -290,9 +478,8 @@
 
     function organizarFixtureMezclado(partidos) {
       let fixtureOrdenado = [];
-      let equiposUltimosPartidos = {}; // Rastrear últimos 2 partidos de cada equipo
+      let equiposUltimosPartidos = {};
       
-      // Inicializar
       torneo.equipos.forEach(eq => {
         equiposUltimosPartidos[eq.nombre] = [];
       });
@@ -305,17 +492,14 @@
         intentos++;
         let encontrado = false;
         
-        // Intentar encontrar un partido que no viole la regla
         for (let i = 0; i < partidosRestantes.length; i++) {
           const partido = partidosRestantes[i];
           const local = partido.local;
           const visitante = partido.visitante;
           
-          // Verificar si el equipo local o visitante ha jugado más de 2 veces seguidas
           const localUltimos = equiposUltimosPartidos[local];
           const visitanteUltimos = equiposUltimosPartidos[visitante];
           
-          // Contar cuántos partidos seguidos ha jugado cada equipo
           let localSeguidas = 0;
           let visitanteSeguidas = 0;
           
@@ -327,29 +511,22 @@
             visitanteSeguidas = visitanteUltimos.length;
           }
           
-          // Solo permitir si ninguno ha jugado 2 veces seguidas
           if (localSeguidas < 2 && visitanteSeguidas < 2) {
-            // Agregar este partido
             fixtureOrdenado.push(partido);
             
-            // Actualizar histórico
             localUltimos.push(fixtureOrdenado.length - 1);
             visitanteUltimos.push(fixtureOrdenado.length - 1);
             
-            // Mantener solo los últimos 2 partidos en el histórico
             if (localUltimos.length > 2) localUltimos.shift();
             if (visitanteUltimos.length > 2) visitanteUltimos.shift();
             
-            // Remover el partido de los restantes
             partidosRestantes.splice(i, 1);
             encontrado = true;
             break;
           }
         }
         
-        // Si no se encontró partido válido, reintentar con los restantes
         if (!encontrado && partidosRestantes.length > 0) {
-          // Barajar los partidos restantes e intentar de nuevo
           for (let i = partidosRestantes.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             [partidosRestantes[i], partidosRestantes[j]] = [partidosRestantes[j], partidosRestantes[i]];
@@ -370,7 +547,6 @@
       let jornadaActual = 1;
       
       torneo.partidos.forEach((p, i) => {
-        // Mostrar título de jornada
         if (i === 0 || (i > 0 && hayEquipoQueNoJuegaEnJornada(i))) {
           html += `<div class="jornada-titulo">📅 Jornada ${jornadaActual}</div>`;
           jornadaActual++;
@@ -401,7 +577,6 @@
     }
 
     function hayEquipoQueNoJuegaEnJornada(indicePartido) {
-      // Buscar hacia atrás para encontrar todos los equipos que juegan juntos
       let equiposDiferentes = new Set();
       let i = indicePartido - 1;
       
@@ -409,7 +584,6 @@
         equiposDiferentes.add(torneo.partidos[i].local);
         equiposDiferentes.add(torneo.partidos[i].visitante);
         
-        // Si tenemos al menos el mismo número de equipos diferentes que el total, significa que hay un descanso
         if (equiposDiferentes.size === torneo.equipos.length) {
           return true;
         }
@@ -448,7 +622,6 @@
     }
 
     function actualizarEstadisticas() {
-      // Reiniciar estadísticas
       torneo.equipos.forEach(eq => {
         eq.pj = 0;
         eq.pg = 0;
@@ -458,7 +631,6 @@
         eq.puntos = 0;
       });
 
-      // Calcular estadísticas basadas en resultados
       torneo.partidos.forEach(p => {
         if (p.resultado) {
           const local = torneo.equipos.find(e => e.nombre === p.local);
