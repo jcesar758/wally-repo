@@ -32,6 +32,25 @@
       100% { background-position: 1000px 0; }
     }
     
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-20px); }
+    }
+    
+    @keyframes rotate360 {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes particles {
+      0% { transform: translateY(0) translateX(0); opacity: 1; }
+      100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
       background-image: url('https://i.imgur.com/7Q8Z9kJ.png');
@@ -43,6 +62,11 @@
       min-height: 100vh;
       position: relative;
       overflow-x: hidden;
+    }
+    
+    body.light-mode {
+      background-image: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+      color: #1f2937;
     }
     
     body::before {
@@ -57,6 +81,26 @@
       z-index: 1;
     }
     
+    body.light-mode::before {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .particle::before {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: #fbbf24;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #fbbf24;
+    }
+    
     header {
       background: linear-gradient(135deg, rgba(30, 64, 175, 0.95), rgba(59, 130, 246, 0.95));
       padding: 30px 20px;
@@ -66,6 +110,11 @@
       position: relative;
       z-index: 2;
       border-bottom: 3px solid #fbbf24;
+    }
+    
+    body.light-mode header {
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
     }
     
     header h1 {
@@ -79,6 +128,32 @@
       font-size: 1.3em;
       color: #fbbf24;
       text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
+    }
+    
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #3b82f6, #1e40af);
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 18px;
+      z-index: 100;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+    
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+    }
+    
+    body.light-mode .theme-toggle {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #1f2937;
     }
     
     .container { 
@@ -99,6 +174,13 @@
       border: 2px solid rgba(59, 130, 246, 0.2);
       backdrop-filter: blur(10px);
       transition: all 0.3s ease;
+    }
+    
+    body.light-mode .card {
+      background: linear-gradient(135deg, rgba(243, 244, 246, 0.95), rgba(229, 231, 235, 0.95));
+      color: #1f2937;
+      border: 2px solid rgba(59, 130, 246, 0.3);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
     
     .card:hover {
@@ -190,10 +272,21 @@
       transition: all 0.3s ease;
     }
     
+    body.light-mode th,
+    body.light-mode td {
+      border-bottom: 1px solid #d1d5db;
+    }
+    
     th { 
       background: linear-gradient(135deg, #1e40af, #3b82f6);
       font-weight: bold;
       text-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
+    }
+    
+    body.light-mode th {
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      color: white;
+      text-shadow: none;
     }
     
     td:first-child { text-align: left; padding-left: 20px; }
@@ -201,6 +294,10 @@
     tr:hover { 
       background: rgba(59, 130, 246, 0.2);
       transform: scale(1.02);
+    }
+    
+    body.light-mode tr:hover {
+      background: rgba(59, 130, 246, 0.1);
     }
     
     input[type="text"], input[type="number"] { 
@@ -214,11 +311,24 @@
       backdrop-filter: blur(10px);
     }
     
+    body.light-mode input[type="text"],
+    body.light-mode input[type="number"] {
+      background: rgba(243, 244, 246, 0.9);
+      color: #1f2937;
+      border-color: #d1d5db;
+    }
+    
     input[type="text"]:focus, input[type="number"]:focus {
       outline: none;
       border-color: #3b82f6;
       background: rgba(30, 41, 59, 0.9);
       box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    }
+    
+    body.light-mode input[type="text"]:focus,
+    body.light-mode input[type="number"]:focus {
+      background: rgba(229, 231, 235, 0.9);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
     }
     
     .partido-card {
@@ -233,6 +343,12 @@
       border: 2px solid rgba(59, 130, 246, 0.2);
       animation: slideInLeft 0.5s ease-out;
       transition: all 0.3s ease;
+    }
+    
+    body.light-mode .partido-card {
+      background: linear-gradient(135deg, rgba(243, 244, 246, 0.9), rgba(229, 231, 235, 0.9));
+      color: #1f2937;
+      border: 2px solid rgba(59, 130, 246, 0.3);
     }
     
     .partido-card:hover {
@@ -265,6 +381,12 @@
       transition: all 0.3s ease;
     }
     
+    body.light-mode li {
+      background: linear-gradient(135deg, rgba(243, 244, 246, 0.8), rgba(229, 231, 235, 0.8));
+      color: #1f2937;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+    
     li:hover {
       border-color: rgba(59, 130, 246, 0.5);
       box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
@@ -282,14 +404,65 @@
       border-left: 4px solid #fbbf24;
     }
     
+    body.light-mode .jornada-titulo {
+      background: linear-gradient(135deg, #3b82f6, #60a5fa);
+      text-shadow: none;
+      color: white;
+    }
+    
     h2 {
       color: #fbbf24;
       text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
       animation: fadeIn 0.6s ease-out;
     }
+    
+    body.light-mode h2 {
+      color: #3b82f6;
+      text-shadow: none;
+    }
+    
+    label {
+      display: block;
+      margin: 10px 0 5px 0;
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+    
+    body.light-mode label {
+      color: #1f2937;
+    }
+    
+    .sound-toggle {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      background: linear-gradient(135deg, #3b82f6, #1e40af);
+      border: none;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 18px;
+      z-index: 100;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+    
+    .sound-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
+    }
+    
+    body.light-mode .sound-toggle {
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #1f2937;
+    }
   </style>
 </head>
 <body>
+  <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">🌙</button>
+  <button class="sound-toggle" onclick="toggleSound()" title="Activar/Desactivar sonidos">🔊</button>
+
   <header>
     <h1>🏆 Retos y Campeonatos Amix</h1>
     <h2>Wally Edition</h2>
@@ -346,8 +519,79 @@
 
   <script>
     let torneo = { nombre: "", equipos: [], partidos: [] };
+    let soundEnabled = true;
+    let themeMode = 'dark';
 
+    // Crear contexto de audio para sonidos
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(frequency = 800, duration = 100, type = 'sine') {
+      if (!soundEnabled) return;
+      
+      try {
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        oscillator.frequency.value = frequency;
+        oscillator.type = type;
+        
+        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
+        
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + duration / 1000);
+      } catch (e) {
+        console.log('Audio no disponible');
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      const btn = document.querySelector('.sound-toggle');
+      btn.textContent = soundEnabled ? '🔊' : '🔇';
+      playSound(800, 100);
+    }
+
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      const btn = document.querySelector('.theme-toggle');
+      themeMode = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+      btn.textContent = themeMode === 'dark' ? '🌙' : '☀️';
+      localStorage.setItem('theme', themeMode);
+      playSound(600, 100);
+    }
+
+    // Crear partículas animadas
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = '100%';
+      particle.style.animation = `particles ${2 + Math.random() * 2}s linear`;
+      document.body.appendChild(particle);
+      
+      setTimeout(() => particle.remove(), 4000);
+    }
+
+    // Generar partículas ocasionalmente
+    setInterval(() => {
+      if (Math.random() > 0.7) {
+        createParticle();
+      }
+    }, 1000);
+
+    // Cargar tema guardado
     window.onload = () => {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      if (savedTheme === 'light') {
+        document.body.classList.add('light-mode');
+        document.querySelector('.theme-toggle').textContent = '☀️';
+        themeMode = 'light';
+      }
+
       const saved = localStorage.getItem('torneoWally');
       if (saved) {
         try {
@@ -375,11 +619,13 @@
       document.getElementById('crearTorneo').style.display = 'block';
       document.getElementById('nombreTorneo').value = '';
       document.getElementById('numEquipos').value = 5;
+      playSound(800, 100);
     }
 
     function volverMenu() {
       ocultarTodasPantallas();
       document.getElementById('menu').style.display = 'block';
+      playSound(600, 100);
     }
 
     function crearTorneo() {
@@ -388,10 +634,12 @@
       
       if (!nombre) {
         alert("❌ Escribe el nombre del torneo");
+        playSound(300, 200);
         return;
       }
       if (isNaN(numEquipos) || numEquipos < 2 || numEquipos > 16) {
         alert("❌ El número de equipos debe estar entre 2 y 16");
+        playSound(300, 200);
         return;
       }
 
@@ -405,6 +653,7 @@
       ocultarTodasPantallas();
       document.getElementById('gestionEquipos').style.display = 'block';
       actualizarListaEquipos();
+      playSound(1200, 150);
     }
 
     function actualizarListaEquipos() {
@@ -424,6 +673,7 @@
       if (nuevoNombre.trim()) {
         torneo.equipos[i].nombre = nuevoNombre.trim();
         guardar();
+        playSound(900, 50);
       }
     }
 
@@ -431,16 +681,19 @@
       const nombre = document.getElementById('nuevoEquipo').value.trim();
       if (!nombre) {
         alert("❌ Escribe el nombre del equipo");
+        playSound(300, 200);
         return;
       }
       if (torneo.equipos.some(e => e.nombre.toLowerCase() === nombre.toLowerCase())) {
         alert("❌ Este equipo ya existe");
+        playSound(300, 200);
         return;
       }
       torneo.equipos.push({nombre, pj:0, pg:0, pp:0, pf:0, pc:0, puntos:0});
       document.getElementById('nuevoEquipo').value = "";
       actualizarListaEquipos();
       guardar();
+      playSound(1100, 100);
     }
 
     function eliminarEquipo(i) {
@@ -448,12 +701,14 @@
         torneo.equipos.splice(i, 1);
         actualizarListaEquipos();
         guardar();
+        playSound(400, 150);
       }
     }
 
     function generarFixture() {
       if (torneo.equipos.length < 2) {
         alert("❌ Mínimo 2 equipos para generar fixture");
+        playSound(300, 200);
         return;
       }
       
@@ -474,6 +729,7 @@
       ocultarTodasPantallas();
       document.getElementById('fixture').style.display = 'block';
       mostrarPartidos();
+      playSound(1500, 200);
     }
 
     function organizarFixtureMezclado(partidos) {
@@ -600,10 +856,12 @@
       
       if (isNaN(local) || isNaN(visit) || local < 0 || visit < 0) {
         alert("❌ Ingresa números válidos para ambos marcadores");
+        playSound(300, 200);
         return;
       }
       if (Math.abs(local - visit) < 2) {
         alert("❌ Debe ganar por 2 puntos o más");
+        playSound(300, 200);
         return;
       }
 
@@ -611,6 +869,7 @@
       actualizarEstadisticas();
       mostrarPartidos();
       guardar();
+      playSound(1300, 150);
     }
 
     function editarResultado(i) {
@@ -618,6 +877,7 @@
         torneo.partidos[i].resultado = null;
         mostrarPartidos();
         guardar();
+        playSound(800, 100);
       }
     }
 
@@ -686,11 +946,13 @@
       document.getElementById('bodyTabla').innerHTML = html;
       ocultarTodasPantallas();
       document.getElementById('tablaPosiciones').style.display = 'block';
+      playSound(1500, 200);
     }
 
     function volverAFixture() {
       ocultarTodasPantallas();
       document.getElementById('fixture').style.display = 'block';
+      playSound(600, 100);
     }
 
     function mostrarCargarTorneo() {
@@ -710,8 +972,10 @@
             document.getElementById('fixture').style.display = 'block';
             mostrarPartidos();
             alert("✅ Torneo cargado correctamente");
+            playSound(1500, 200);
           } catch(error) {
             alert("❌ Error al cargar el archivo. Asegúrate de que sea un JSON válido");
+            playSound(300, 200);
           }
         };
         reader.readAsText(file);
@@ -722,6 +986,7 @@
     function exportarTorneo() {
       if (torneo.equipos.length === 0) {
         alert("❌ No hay torneo para exportar");
+        playSound(300, 200);
         return;
       }
       const data = JSON.stringify(torneo, null, 2);
@@ -732,12 +997,14 @@
       a.download = (torneo.nombre || "torneo") + ".json";
       a.click();
       URL.revokeObjectURL(url);
+      playSound(1300, 150);
     }
 
     function reiniciarTodo() {
       if (confirm("⚠️ ¿Borrar TODO? Esta acción no se puede deshacer")) {
         localStorage.removeItem('torneoWally');
         torneo = { nombre: "", equipos: [], partidos: [] };
+        playSound(200, 300);
         location.reload();
       }
     }
