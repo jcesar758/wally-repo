@@ -88,6 +88,14 @@
       justify-content: space-between;
       align-items: center;
     }
+    .jornada-titulo {
+      background: #1e40af;
+      padding: 12px;
+      margin: 20px 0 10px 0;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 16px;
+    }
   </style>
 </head>
 <body>
@@ -120,7 +128,7 @@
       <div id="listaEquipos"></div>
       <input type="text" id="nuevoEquipo" placeholder="Nombre del equipo" style="width:70%; padding:12px; margin:10px 0;">
       <button onclick="agregarEquipo()" class="btn-primary" style="width:28%;">+ Agregar</button>
-      <button onclick="generarFixture()" class="btn-success" style="width:100%; margin-top:10px;">✅ Generar Fixture (Ida y Vuelta)</button>
+      <button onclick="generarFixture()" class="btn-success" style="width:100%; margin-top:10px;">✅ Generar Fixture (Mezclado)</button>
       <button onclick="volverMenu()" class="btn-danger" style="width:100%; margin-top:10px;">Atrás</button>
     </div>
 
@@ -259,15 +267,20 @@
         return;
       }
       
-      torneo.partidos = [];
+      // Generar todos los partidos posibles (ida y vuelta)
+      let partidosPosibles = [];
       const eq = torneo.equipos;
       
       for (let i = 0; i < eq.length; i++) {
-        for (let j = i+1; j < eq.length; j++) {
-          torneo.partidos.push({local: eq[i].nombre, visitante: eq[j].nombre, resultado: null});
-          torneo.partidos.push({local: eq[j].nombre, visitante: eq[i].nombre, resultado: null});
+        for (let j = 0; j < eq.length; j++) {
+          if (i !== j) {
+            partidosPosibles.push({local: eq[i].nombre, visitante: eq[j].nombre, resultado: null});
+          }
         }
       }
+      
+      // Barajar y organizar los partidos
+      torneo.partidos = organizarFixtureMezclado(partidosPosibles);
       
       guardar();
       ocultarTodasPantallas();
@@ -275,9 +288,94 @@
       mostrarPartidos();
     }
 
+    function organizarFixtureMezclado(partidos) {
+      let fixtureOrdenado = [];
+      let equiposUltimosPartidos = {}; // Rastrear últimos 2 partidos de cada equipo
+      
+      // Inicializar
+      torneo.equipos.forEach(eq => {
+        equiposUltimosPartidos[eq.nombre] = [];
+      });
+      
+      let partidosRestantes = [...partidos];
+      let intentos = 0;
+      const maxIntentos = 10000;
+      
+      while (partidosRestantes.length > 0 && intentos < maxIntentos) {
+        intentos++;
+        let encontrado = false;
+        
+        // Intentar encontrar un partido que no viole la regla
+        for (let i = 0; i < partidosRestantes.length; i++) {
+          const partido = partidosRestantes[i];
+          const local = partido.local;
+          const visitante = partido.visitante;
+          
+          // Verificar si el equipo local o visitante ha jugado más de 2 veces seguidas
+          const localUltimos = equiposUltimosPartidos[local];
+          const visitanteUltimos = equiposUltimosPartidos[visitante];
+          
+          // Contar cuántos partidos seguidos ha jugado cada equipo
+          let localSeguidas = 0;
+          let visitanteSeguidas = 0;
+          
+          if (localUltimos.length > 0 && localUltimos[localUltimos.length - 1] === fixtureOrdenado.length) {
+            localSeguidas = localUltimos.length;
+          }
+          
+          if (visitanteUltimos.length > 0 && visitanteUltimos[visitanteUltimos.length - 1] === fixtureOrdenado.length) {
+            visitanteSeguidas = visitanteUltimos.length;
+          }
+          
+          // Solo permitir si ninguno ha jugado 2 veces seguidas
+          if (localSeguidas < 2 && visitanteSeguidas < 2) {
+            // Agregar este partido
+            fixtureOrdenado.push(partido);
+            
+            // Actualizar histórico
+            localUltimos.push(fixtureOrdenado.length - 1);
+            visitanteUltimos.push(fixtureOrdenado.length - 1);
+            
+            // Mantener solo los últimos 2 partidos en el histórico
+            if (localUltimos.length > 2) localUltimos.shift();
+            if (visitanteUltimos.length > 2) visitanteUltimos.shift();
+            
+            // Remover el partido de los restantes
+            partidosRestantes.splice(i, 1);
+            encontrado = true;
+            break;
+          }
+        }
+        
+        // Si no se encontró partido válido, reintentar con los restantes
+        if (!encontrado && partidosRestantes.length > 0) {
+          // Barajar los partidos restantes e intentar de nuevo
+          for (let i = partidosRestantes.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [partidosRestantes[i], partidosRestantes[j]] = [partidosRestantes[j], partidosRestantes[i]];
+          }
+        }
+      }
+      
+      if (partidosRestantes.length > 0) {
+        alert("⚠️ No se pudo organizar un fixture válido después de varios intentos. Se mostrarán los partidos en orden aleatorio.");
+        return fixtureOrdenado.concat(partidosRestantes);
+      }
+      
+      return fixtureOrdenado;
+    }
+
     function mostrarPartidos() {
       let html = "";
+      let jornadaActual = 1;
+      
       torneo.partidos.forEach((p, i) => {
+        // Mostrar título de jornada
+        if (i === 0 || (i > 0 && hayEquipoQueNoJuegaEnJornada(i))) {
+          html += `<div class="jornada-titulo">📅 Jornada ${jornadaActual}</div>`;
+          jornadaActual++;
+        }
+        
         if (p.resultado) {
           const local = p.resultado.local;
           const visitante = p.resultado.visitante;
@@ -300,6 +398,26 @@
         }
       });
       document.getElementById('listaPartidos').innerHTML = html;
+    }
+
+    function hayEquipoQueNoJuegaEnJornada(indicePartido) {
+      // Buscar hacia atrás para encontrar todos los equipos que juegan juntos
+      let equiposDiferentes = new Set();
+      let i = indicePartido - 1;
+      
+      while (i >= 0) {
+        equiposDiferentes.add(torneo.partidos[i].local);
+        equiposDiferentes.add(torneo.partidos[i].visitante);
+        
+        // Si tenemos al menos el mismo número de equipos diferentes que el total, significa que hay un descanso
+        if (equiposDiferentes.size === torneo.equipos.length) {
+          return true;
+        }
+        
+        i--;
+      }
+      
+      return false;
     }
 
     function guardarResultado(i) {
