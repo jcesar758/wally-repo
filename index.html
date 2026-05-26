@@ -6,189 +6,30 @@
   <title>🏆 Retos y Campeonatos Amix - Wally</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-30px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-    
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3), 0 4px 15px rgba(0,0,0,0.4); }
-      50% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.6), 0 4px 15px rgba(0,0,0,0.4); }
-    }
-    
-    @keyframes shimmer {
-      0% { background-position: -1000px 0; }
-      100% { background-position: 1000px 0; }
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-    
-    @keyframes rotate360 {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    
-    @keyframes particles {
-      0% { transform: translateY(0) translateX(0); opacity: 1; }
-      100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
-    }
-    
-    html {
-      scroll-behavior: smooth;
-    }
-    
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      background-image: url('https://i.imgur.com/7Q8Z9kJ.png');
-      background-size: cover;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      background-position: center;
+      background: linear-gradient(135deg, #0f172a, #1e2937);
       color: #e2e8f0;
       min-height: 100vh;
-      position: relative;
-      overflow-x: hidden;
     }
-    
-    body.light-mode {
-      background-image: linear-gradient(135deg, #f3f4f6, #e5e7eb);
-      color: #1f2937;
-    }
-    
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(15, 23, 42, 0.3);
-      pointer-events: none;
-      z-index: 1;
-    }
-    
-    body.light-mode::before {
-      background: rgba(255, 255, 255, 0.1);
-    }
-    
-    .particle {
-      position: fixed;
-      pointer-events: none;
-      z-index: 0;
-    }
-    
-    .particle::before {
-      content: '';
-      position: absolute;
-      width: 4px;
-      height: 4px;
-      background: #fbbf24;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #fbbf24;
-    }
-    
     header {
-      background: linear-gradient(135deg, rgba(30, 64, 175, 0.95), rgba(59, 130, 246, 0.95));
-      padding: 30px 20px;
+      background: linear-gradient(135deg, #1e40af, #3b82f6);
+      padding: 25px;
       text-align: center;
-      box-shadow: 0 8px 32px rgba(59, 130, 246, 0.4);
-      animation: slideInLeft 0.8s ease-out;
-      position: relative;
-      z-index: 2;
-      border-bottom: 3px solid #fbbf24;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.5);
     }
-    
-    body.light-mode header {
-      background: linear-gradient(135deg, #3b82f6, #60a5fa);
-      box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
-    }
-    
-    header h1 {
-      font-size: 2.5em;
-      text-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
-      animation: pulse 3s ease-in-out infinite;
-      margin-bottom: 10px;
-    }
-    
-    header h2 {
-      font-size: 1.3em;
-      color: #fbbf24;
-      text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
-    }
-    
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: linear-gradient(135deg, #3b82f6, #1e40af);
-      border: none;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 18px;
-      z-index: 100;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-    }
-    
-    .theme-toggle:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
-    }
-    
-    body.light-mode .theme-toggle {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      color: #1f2937;
-    }
-    
-    .container { 
-      max-width: 1100px; 
-      margin: 20px auto; 
-      padding: 0 15px;
-      position: relative;
-      z-index: 2;
-    }
-    
+    header h1 { font-size: 2.4em; margin-bottom: 8px; }
+    header h2 { color: #fbbf24; font-size: 1.4em; }
+
+    .container { max-width: 1100px; margin: 20px auto; padding: 0 15px; }
     .card {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.95), rgba(15, 23, 42, 0.95));
+      background: rgba(30, 41, 59, 0.95);
       border-radius: 16px;
       padding: 25px;
       margin: 15px 0;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
-      animation: fadeIn 0.6s ease-out;
-      border: 2px solid rgba(59, 130, 246, 0.2);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+      border: 1px solid rgba(59, 130, 246, 0.3);
     }
-    
-    body.light-mode .card {
-      background: linear-gradient(135deg, rgba(243, 244, 246, 0.95), rgba(229, 231, 235, 0.95));
-      color: #1f2937;
-      border: 2px solid rgba(59, 130, 246, 0.3);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    }
-    
-    .card:hover {
-      animation: glow 2s ease-in-out infinite;
-      border-color: rgba(59, 130, 246, 0.5);
-      transform: translateY(-5px);
-    }
-    
     button {
       padding: 14px 20px;
       margin: 6px;
@@ -197,272 +38,41 @@
       font-size: 16px;
       cursor: pointer;
       font-weight: bold;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
     }
-    
-    button::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.2);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-    
-    button:active::before {
-      width: 300px;
-      height: 300px;
-    }
-    
-    button:hover { 
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-    }
-    
-    .btn-primary { 
-      background: linear-gradient(135deg, #3b82f6, #1e40af);
-      color: white;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-    }
-    
-    .btn-primary:hover { 
-      background: linear-gradient(135deg, #1e40af, #1e3a8a);
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
-    }
-    
-    .btn-success { 
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: white;
-      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
-    }
-    
-    .btn-success:hover { 
-      background: linear-gradient(135deg, #16a34a, #15803d);
-      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.6);
-    }
-    
-    .btn-danger { 
-      background: linear-gradient(135deg, #ef4444, #dc2626);
-      color: white;
-      box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
-    }
-    
-    .btn-danger:hover { 
-      background: linear-gradient(135deg, #dc2626, #b91c1c);
-      box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
-    }
+    .btn-primary { background: #3b82f6; color: white; }
+    .btn-success { background: #22c55e; color: white; }
+    .btn-danger { background: #ef4444; color: white; }
 
-    table { 
-      width: 100%; 
-      border-collapse: collapse; 
-      margin-top: 10px;
-      animation: fadeIn 0.8s ease-out;
-    }
-    
-    th, td { 
-      padding: 14px; 
-      text-align: center; 
-      border-bottom: 1px solid #334155;
-      transition: all 0.3s ease;
-    }
-    
-    body.light-mode th,
-    body.light-mode td {
-      border-bottom: 1px solid #d1d5db;
-    }
-    
-    th { 
-      background: linear-gradient(135deg, #1e40af, #3b82f6);
-      font-weight: bold;
-      text-shadow: 0 0 10px rgba(251, 191, 36, 0.2);
-    }
-    
-    body.light-mode th {
-      background: linear-gradient(135deg, #3b82f6, #60a5fa);
-      color: white;
-      text-shadow: none;
-    }
-    
-    td:first-child { text-align: left; padding-left: 20px; }
-    
-    tr:hover { 
-      background: rgba(59, 130, 246, 0.2);
-      transform: scale(1.02);
-    }
-    
-    body.light-mode tr:hover {
-      background: rgba(59, 130, 246, 0.1);
-    }
-    
-    input[type="text"], input[type="number"] { 
-      padding: 10px; 
-      border-radius: 6px; 
-      border: 2px solid #475569;
-      background: rgba(15, 23, 42, 0.8);
-      color: #e2e8f0;
-      font-size: 14px;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-    
-    body.light-mode input[type="text"],
-    body.light-mode input[type="number"] {
-      background: rgba(243, 244, 246, 0.9);
-      color: #1f2937;
-      border-color: #d1d5db;
-    }
-    
-    input[type="text"]:focus, input[type="number"]:focus {
-      outline: none;
-      border-color: #3b82f6;
-      background: rgba(30, 41, 59, 0.9);
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-    }
-    
-    body.light-mode input[type="text"]:focus,
-    body.light-mode input[type="number"]:focus {
-      background: rgba(229, 231, 235, 0.9);
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
-    }
-    
-    .partido-card {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      border: 2px solid rgba(59, 130, 246, 0.2);
-      animation: slideInLeft 0.5s ease-out;
-      transition: all 0.3s ease;
-    }
-    
-    body.light-mode .partido-card {
-      background: linear-gradient(135deg, rgba(243, 244, 246, 0.9), rgba(229, 231, 235, 0.9));
-      color: #1f2937;
-      border: 2px solid rgba(59, 130, 246, 0.3);
-    }
-    
-    .partido-card:hover {
-      border-color: rgba(59, 130, 246, 0.5);
-      box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-      transform: translateX(10px);
-    }
-    
-    .partido-resultado {
-      background: linear-gradient(135deg, #22c55e, #16a34a);
-      padding: 10px 15px;
-      border-radius: 6px;
-      font-weight: bold;
-      box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    
-    ul { list-style: none; margin: 15px 0; }
-    
-    li { 
-      padding: 10px; 
-      margin: 8px 0; 
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.8));
-      border-radius: 6px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      animation: fadeIn 0.5s ease-out;
-      transition: all 0.3s ease;
-    }
-    
-    body.light-mode li {
-      background: linear-gradient(135deg, rgba(243, 244, 246, 0.8), rgba(229, 231, 235, 0.8));
-      color: #1f2937;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-    }
-    
-    li:hover {
-      border-color: rgba(59, 130, 246, 0.5);
-      box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
-    }
-    
-    .jornada-titulo {
-      background: linear-gradient(135deg, rgba(30, 64, 175, 0.9), rgba(59, 130, 246, 0.9));
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { padding: 14px; text-align: center; border-bottom: 1px solid #475569; }
+    th { background: #1e40af; }
+    input[type="text"], input[type="number"] {
       padding: 12px;
-      margin: 20px 0 10px 0;
-      border-radius: 6px;
+      border-radius: 8px;
+      border: 2px solid #475569;
+      background: #1e2937;
+      color: white;
+      width: 100%;
+      margin: 8px 0;
+    }
+    .partido-card {
+      background: #1e2937;
+      padding: 18px;
+      margin: 12px 0;
+      border-radius: 12px;
+      border: 2px solid rgba(59, 130, 246, 0.4);
+    }
+    .jornada {
+      background: #1e40af;
+      padding: 10px;
+      margin: 15px 0 10px 0;
+      border-radius: 8px;
+      text-align: center;
       font-weight: bold;
-      font-size: 16px;
-      text-shadow: 0 0 10px rgba(251, 191, 36, 0.4);
-      animation: fadeIn 0.6s ease-out;
-      border-left: 4px solid #fbbf24;
-    }
-    
-    body.light-mode .jornada-titulo {
-      background: linear-gradient(135deg, #3b82f6, #60a5fa);
-      text-shadow: none;
-      color: white;
-    }
-    
-    h2 {
-      color: #fbbf24;
-      text-shadow: 0 0 10px rgba(251, 191, 36, 0.3);
-      animation: fadeIn 0.6s ease-out;
-    }
-    
-    body.light-mode h2 {
-      color: #3b82f6;
-      text-shadow: none;
-    }
-    
-    label {
-      display: block;
-      margin: 10px 0 5px 0;
-      color: #e2e8f0;
-      font-weight: 500;
-    }
-    
-    body.light-mode label {
-      color: #1f2937;
-    }
-    
-    .sound-toggle {
-      position: fixed;
-      top: 70px;
-      right: 20px;
-      background: linear-gradient(135deg, #3b82f6, #1e40af);
-      border: none;
-      color: white;
-      padding: 12px 20px;
-      border-radius: 50px;
-      cursor: pointer;
-      font-size: 18px;
-      z-index: 100;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-    }
-    
-    .sound-toggle:hover {
-      transform: scale(1.1);
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
-    }
-    
-    body.light-mode .sound-toggle {
-      background: linear-gradient(135deg, #fbbf24, #f59e0b);
-      color: #1f2937;
     }
   </style>
 </head>
 <body>
-  <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">🌙</button>
-  <button class="sound-toggle" onclick="toggleSound()" title="Activar/Desactivar sonidos">🔊</button>
-
   <header>
     <h1>🏆 Retos y Campeonatos Amix</h1>
     <h2>Wally Edition</h2>
@@ -478,28 +88,24 @@
     </div>
 
     <div id="crearTorneo" class="card" style="display:none;">
-      <h2>🏆 Nuevo Torneo</h2>
-      <input type="text" id="nombreTorneo" placeholder="Nombre del Torneo" style="width:100%; padding:15px; margin:10px 0; font-size:16px;">
-      <label>Número de equipos:</label>
-      <input type="number" id="numEquipos" value="5" min="2" max="16" style="width:100%; padding:15px; font-size:16px; margin:10px 0;">
+      <h2>🏆 Nuevo Torneo de Wally</h2>
+      <input type="text" id="nombreTorneo" placeholder="Nombre del Torneo">
+      <input type="number" id="numEquipos" value="5" min="2" max="16" placeholder="Número de equipos">
       <button class="btn-success" onclick="crearTorneo()" style="width:100%;">Crear Torneo</button>
-      <button onclick="volverMenu()" class="btn-danger" style="width:100%; margin-top:10px;">Cancelar</button>
+      <button onclick="volverMenu()" class="btn-danger" style="width:100%;">Cancelar</button>
     </div>
 
     <div id="gestionEquipos" class="card" style="display:none;">
-      <h2>⚽ Gestión de Equipos</h2>
-      <p id="contadorEquipos"></p>
+      <h2>Equipos</h2>
       <div id="listaEquipos"></div>
-      <input type="text" id="nuevoEquipo" placeholder="Nombre del equipo" style="width:70%; padding:12px; margin:10px 0;">
-      <button onclick="agregarEquipo()" class="btn-primary" style="width:28%;">+ Agregar</button>
-      <button onclick="generarFixture()" class="btn-success" style="width:100%; margin-top:10px;">✅ Generar Fixture (Mezclado)</button>
-      <button onclick="volverMenu()" class="btn-danger" style="width:100%; margin-top:10px;">Atrás</button>
+      <input type="text" id="nuevoEquipo" placeholder="Nombre del equipo">
+      <button onclick="agregarEquipo()" class="btn-primary">+ Agregar</button>
+      <button onclick="generarFixture()" class="btn-success" style="width:100%; margin-top:15px;">✅ Generar Fixture (Máx 1 consecutivo)</button>
     </div>
 
     <div id="fixture" class="card" style="display:none;">
       <h2>📋 Fixture</h2>
       <button onclick="mostrarTablaPosiciones()" class="btn-primary">Ver Tabla de Posiciones</button>
-      <button onclick="volverMenu()" class="btn-danger">Atrás</button>
       <div id="listaPartidos"></div>
     </div>
 
@@ -519,440 +125,228 @@
 
   <script>
     let torneo = { nombre: "", equipos: [], partidos: [] };
-    let soundEnabled = true;
-    let themeMode = 'dark';
 
-    // Crear contexto de audio para sonidos
-    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-    function playSound(frequency = 800, duration = 100, type = 'sine') {
-      if (!soundEnabled) return;
-      
-      try {
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-        
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-        
-        oscillator.frequency.value = frequency;
-        oscillator.type = type;
-        
-        gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + duration / 1000);
-        
-        oscillator.start(audioContext.currentTime);
-        oscillator.stop(audioContext.currentTime + duration / 1000);
-      } catch (e) {
-        console.log('Audio no disponible');
-      }
-    }
-
-    function toggleSound() {
-      soundEnabled = !soundEnabled;
-      const btn = document.querySelector('.sound-toggle');
-      btn.textContent = soundEnabled ? '🔊' : '🔇';
-      playSound(800, 100);
-    }
-
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-      const btn = document.querySelector('.theme-toggle');
-      themeMode = document.body.classList.contains('light-mode') ? 'light' : 'dark';
-      btn.textContent = themeMode === 'dark' ? '🌙' : '☀️';
-      localStorage.setItem('theme', themeMode);
-      playSound(600, 100);
-    }
-
-    // Crear partículas animadas
-    function createParticle() {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
-      particle.style.left = Math.random() * 100 + '%';
-      particle.style.top = '100%';
-      particle.style.animation = `particles ${2 + Math.random() * 2}s linear`;
-      document.body.appendChild(particle);
-      
-      setTimeout(() => particle.remove(), 4000);
-    }
-
-    // Generar partículas ocasionalmente
-    setInterval(() => {
-      if (Math.random() > 0.7) {
-        createParticle();
-      }
-    }, 1000);
-
-    // Cargar tema guardado
     window.onload = () => {
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      if (savedTheme === 'light') {
-        document.body.classList.add('light-mode');
-        document.querySelector('.theme-toggle').textContent = '☀️';
-        themeMode = 'light';
-      }
-
       const saved = localStorage.getItem('torneoWally');
-      if (saved) {
-        try {
-          torneo = JSON.parse(saved);
-        } catch(e) {
-          console.error("Error al cargar torneo guardado", e);
-        }
-      }
+      if (saved) torneo = JSON.parse(saved);
     };
 
-    function guardar() { 
-      localStorage.setItem('torneoWally', JSON.stringify(torneo)); 
+    function guardar() {
+      localStorage.setItem('torneoWally', JSON.stringify(torneo));
     }
 
-    function ocultarTodasPantallas() {
-      document.getElementById('menu').style.display = 'none';
-      document.getElementById('crearTorneo').style.display = 'none';
-      document.getElementById('gestionEquipos').style.display = 'none';
-      document.getElementById('fixture').style.display = 'none';
-      document.getElementById('tablaPosiciones').style.display = 'none';
+    function ocultarTodas() {
+      document.querySelectorAll('.card').forEach(c => c.style.display = 'none');
     }
 
     function mostrarCrearTorneo() {
-      ocultarTodasPantallas();
+      ocultarTodas();
       document.getElementById('crearTorneo').style.display = 'block';
-      document.getElementById('nombreTorneo').value = '';
-      document.getElementById('numEquipos').value = 5;
-      playSound(800, 100);
     }
 
     function volverMenu() {
-      ocultarTodasPantallas();
+      ocultarTodas();
       document.getElementById('menu').style.display = 'block';
-      playSound(600, 100);
     }
 
     function crearTorneo() {
       const nombre = document.getElementById('nombreTorneo').value.trim();
-      const numEquipos = parseInt(document.getElementById('numEquipos').value);
-      
-      if (!nombre) {
-        alert("❌ Escribe el nombre del torneo");
-        playSound(300, 200);
-        return;
-      }
-      if (isNaN(numEquipos) || numEquipos < 2 || numEquipos > 16) {
-        alert("❌ El número de equipos debe estar entre 2 y 16");
-        playSound(300, 200);
+      const num = parseInt(document.getElementById('numEquipos').value);
+
+      if (!nombre || isNaN(num) || num < 2 || num > 16) {
+        alert("❌ Datos inválidos");
         return;
       }
 
       torneo = { nombre, equipos: [], partidos: [] };
-      
-      for (let i = 0; i < numEquipos; i++) {
+      for (let i = 0; i < num; i++) {
         torneo.equipos.push({nombre: `Equipo ${i+1}`, pj:0, pg:0, pp:0, pf:0, pc:0, puntos:0});
       }
-      
+
       guardar();
-      ocultarTodasPantallas();
+      ocultarTodas();
       document.getElementById('gestionEquipos').style.display = 'block';
       actualizarListaEquipos();
-      playSound(1200, 150);
     }
 
     function actualizarListaEquipos() {
-      let html = `<ul>`;
+      let html = "";
       torneo.equipos.forEach((eq, i) => {
-        html += `<li>
-          <input type="text" value="${eq.nombre}" style="width:70%; padding:8px;" onchange="renombrarEquipo(${i}, this.value)">
-          <button onclick="eliminarEquipo(${i})" class="btn-danger" style="margin:0; padding:10px 15px;">✕ Eliminar</button>
-        </li>`;
+        html += `<div class="card">
+          <input type="text" value="${eq.nombre}" onchange="renombrarEquipo(${i}, this.value)" style="width:75%;">
+          <button onclick="eliminarEquipo(${i})" class="btn-danger">Eliminar</button>
+        </div>`;
       });
-      html += "</ul>";
       document.getElementById('listaEquipos').innerHTML = html;
-      document.getElementById('contadorEquipos').textContent = `${torneo.equipos.length} equipos agregados`;
     }
 
-    function renombrarEquipo(i, nuevoNombre) {
-      if (nuevoNombre.trim()) {
-        torneo.equipos[i].nombre = nuevoNombre.trim();
-        guardar();
-        playSound(900, 50);
-      }
+    function renombrarEquipo(i, nuevo) {
+      if (nuevo.trim()) torneo.equipos[i].nombre = nuevo.trim();
+      guardar();
     }
 
     function agregarEquipo() {
       const nombre = document.getElementById('nuevoEquipo').value.trim();
-      if (!nombre) {
-        alert("❌ Escribe el nombre del equipo");
-        playSound(300, 200);
-        return;
-      }
-      if (torneo.equipos.some(e => e.nombre.toLowerCase() === nombre.toLowerCase())) {
-        alert("❌ Este equipo ya existe");
-        playSound(300, 200);
-        return;
-      }
+      if (!nombre) return alert("Escribe un nombre");
       torneo.equipos.push({nombre, pj:0, pg:0, pp:0, pf:0, pc:0, puntos:0});
       document.getElementById('nuevoEquipo').value = "";
       actualizarListaEquipos();
       guardar();
-      playSound(1100, 100);
     }
 
     function eliminarEquipo(i) {
-      if (confirm(`¿Eliminar ${torneo.equipos[i].nombre}?`)) {
+      if (confirm("¿Eliminar este equipo?")) {
         torneo.equipos.splice(i, 1);
         actualizarListaEquipos();
         guardar();
-        playSound(400, 150);
       }
     }
 
+    // ==================== FIXTURE MEJORADO (Máximo 1 consecutivo) ====================
     function generarFixture() {
-      if (torneo.equipos.length < 2) {
-        alert("❌ Mínimo 2 equipos para generar fixture");
-        playSound(300, 200);
-        return;
-      }
-      
-      let partidosPosibles = [];
-      const eq = torneo.equipos;
-      
-      for (let i = 0; i < eq.length; i++) {
-        for (let j = 0; j < eq.length; j++) {
-          if (i !== j) {
-            partidosPosibles.push({local: eq[i].nombre, visitante: eq[j].nombre, resultado: null});
-          }
-        }
-      }
-      
-      torneo.partidos = organizarFixtureMezclado(partidosPosibles);
-      
-      guardar();
-      ocultarTodasPantallas();
+      if (torneo.equipos.length < 2) return alert("Mínimo 2 equipos");
+
+      const equipos = torneo.equipos.map(e => e.nombre);
+      torneo.partidos = generarFixtureSinConsecutivos(equipos);
+
+      ocultarTodas();
       document.getElementById('fixture').style.display = 'block';
       mostrarPartidos();
-      playSound(1500, 200);
+      guardar();
     }
 
-    function organizarFixtureMezclado(partidos) {
-      let fixtureOrdenado = [];
-      let equiposUltimosPartidos = {};
-      
-      torneo.equipos.forEach(eq => {
-        equiposUltimosPartidos[eq.nombre] = [];
-      });
-      
-      let partidosRestantes = [...partidos];
-      let intentos = 0;
-      const maxIntentos = 10000;
-      
-      while (partidosRestantes.length > 0 && intentos < maxIntentos) {
-        intentos++;
-        let encontrado = false;
-        
-        for (let i = 0; i < partidosRestantes.length; i++) {
-          const partido = partidosRestantes[i];
-          const local = partido.local;
-          const visitante = partido.visitante;
-          
-          const localUltimos = equiposUltimosPartidos[local];
-          const visitanteUltimos = equiposUltimosPartidos[visitante];
-          
-          let localSeguidas = 0;
-          let visitanteSeguidas = 0;
-          
-          if (localUltimos.length > 0 && localUltimos[localUltimos.length - 1] === fixtureOrdenado.length) {
-            localSeguidas = localUltimos.length;
-          }
-          
-          if (visitanteUltimos.length > 0 && visitanteUltimos[visitanteUltimos.length - 1] === fixtureOrdenado.length) {
-            visitanteSeguidas = visitanteUltimos.length;
-          }
-          
-          if (localSeguidas < 2 && visitanteSeguidas < 2) {
-            fixtureOrdenado.push(partido);
-            
-            localUltimos.push(fixtureOrdenado.length - 1);
-            visitanteUltimos.push(fixtureOrdenado.length - 1);
-            
-            if (localUltimos.length > 2) localUltimos.shift();
-            if (visitanteUltimos.length > 2) visitanteUltimos.shift();
-            
-            partidosRestantes.splice(i, 1);
-            encontrado = true;
-            break;
-          }
-        }
-        
-        if (!encontrado && partidosRestantes.length > 0) {
-          for (let i = partidosRestantes.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [partidosRestantes[i], partidosRestantes[j]] = [partidosRestantes[j], partidosRestantes[i]];
-          }
+    function generarFixtureSinConsecutivos(equipos) {
+      let partidos = [];
+      const n = equipos.length;
+
+      for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < n; j++) {
+          partidos.push({local: equipos[i], visitante: equipos[j], resultado: null});
+          partidos.push({local: equipos[j], visitante: equipos[i], resultado: null});
         }
       }
-      
-      if (partidosRestantes.length > 0) {
-        alert("⚠️ No se pudo organizar un fixture válido después de varios intentos. Se mostrarán los partidos en orden aleatorio.");
-        return fixtureOrdenado.concat(partidosRestantes);
+
+      let mejorFixture = null;
+      let mejorScore = Infinity;
+
+      for (let intento = 0; intento < 2000; intento++) {
+        let actual = [...partidos].sort(() => Math.random() - 0.5);
+        let score = evaluarFixture(actual, equipos);
+        if (score < mejorScore) {
+          mejorScore = score;
+          mejorFixture = actual;
+        }
+        if (score === 0) break;
       }
-      
-      return fixtureOrdenado;
+
+      if (mejorScore > 0) alert("⚠️ No se encontró fixture perfecto. Se usó el mejor posible.");
+      else alert("✅ Fixture generado sin partidos consecutivos!");
+
+      return mejorFixture;
+    }
+
+    function evaluarFixture(fixture, equipos) {
+      let penalizacion = 0;
+      let ultimo = {};
+      equipos.forEach(eq => ultimo[eq] = -10);
+
+      for (let i = 0; i < fixture.length; i++) {
+        const p = fixture[i];
+        if (ultimo[p.local] === i-1) penalizacion += 100;
+        if (ultimo[p.visitante] === i-1) penalizacion += 100;
+        ultimo[p.local] = i;
+        ultimo[p.visitante] = i;
+      }
+      return penalizacion;
     }
 
     function mostrarPartidos() {
       let html = "";
-      let jornadaActual = 1;
-      
       torneo.partidos.forEach((p, i) => {
-        if (i === 0 || (i > 0 && hayEquipoQueNoJuegaEnJornada(i))) {
-          html += `<div class="jornada-titulo">📅 Jornada ${jornadaActual}</div>`;
-          jornadaActual++;
-        }
-        
         if (p.resultado) {
-          const local = p.resultado.local;
-          const visitante = p.resultado.visitante;
-          const resultado = local > visitante ? "🔵" : (local < visitante ? "🔴" : "⚪");
           html += `<div class="partido-card">
-            <strong>${p.local} vs ${p.visitante}</strong>
-            <span class="partido-resultado">${local} - ${visitante} ${resultado}</span>
-            <button onclick="editarResultado(${i})" class="btn-primary" style="margin:0; padding:10px 15px;">Editar</button>
+            <strong>${p.local} vs ${p.visitante}</strong><br>
+            <b>${p.resultado.local} - ${p.resultado.visitante}</b>
+            <button onclick="editarResultado(${i})" class="btn-primary">Editar</button>
           </div>`;
         } else {
           html += `<div class="partido-card">
-            <strong>${p.local} vs ${p.visitante}</strong>
-            <div style="display:flex; gap:5px; align-items:center;">
-              <input type="number" id="L${i}" placeholder="Goles" min="0" style="width:60px;">
-              <span>-</span>
-              <input type="number" id="V${i}" placeholder="Goles" min="0" style="width:60px;">
-              <button onclick="guardarResultado(${i})" class="btn-success" style="margin:0; padding:10px 15px;">✓ Guardar</button>
-            </div>
+            <strong>${p.local} vs ${p.visitante}</strong><br>
+            <input type="number" id="L${i}" placeholder="15" style="width:70px"> -
+            <input type="number" id="V${i}" placeholder="13" style="width:70px">
+            <button onclick="guardarResultado(${i})" class="btn-success">Guardar</button>
           </div>`;
         }
       });
       document.getElementById('listaPartidos').innerHTML = html;
     }
 
-    function hayEquipoQueNoJuegaEnJornada(indicePartido) {
-      let equiposDiferentes = new Set();
-      let i = indicePartido - 1;
-      
-      while (i >= 0) {
-        equiposDiferentes.add(torneo.partidos[i].local);
-        equiposDiferentes.add(torneo.partidos[i].visitante);
-        
-        if (equiposDiferentes.size === torneo.equipos.length) {
-          return true;
-        }
-        
-        i--;
-      }
-      
-      return false;
-    }
-
     function guardarResultado(i) {
       const local = parseInt(document.getElementById(`L${i}`).value);
       const visit = parseInt(document.getElementById(`V${i}`).value);
-      
-      if (isNaN(local) || isNaN(visit) || local < 0 || visit < 0) {
-        alert("❌ Ingresa números válidos para ambos marcadores");
-        playSound(300, 200);
-        return;
-      }
-      if (Math.abs(local - visit) < 2) {
-        alert("❌ Debe ganar por 2 puntos o más");
-        playSound(300, 200);
-        return;
-      }
+      if (isNaN(local) || isNaN(visit)) return alert("Ingresa ambos marcadores");
+      if (Math.abs(local - visit) < 2) return alert("Debe ganar por 2 puntos");
 
       torneo.partidos[i].resultado = {local, visitante: visit};
-      actualizarEstadisticas();
       mostrarPartidos();
       guardar();
-      playSound(1300, 150);
     }
 
     function editarResultado(i) {
-      if (confirm("¿Editar este resultado?")) {
+      if (confirm("¿Editar resultado?")) {
         torneo.partidos[i].resultado = null;
         mostrarPartidos();
         guardar();
-        playSound(800, 100);
       }
     }
 
     function actualizarEstadisticas() {
-      torneo.equipos.forEach(eq => {
-        eq.pj = 0;
-        eq.pg = 0;
-        eq.pp = 0;
-        eq.pf = 0;
-        eq.pc = 0;
-        eq.puntos = 0;
-      });
+      torneo.equipos.forEach(eq => eq.pj = eq.pg = eq.pp = eq.pf = eq.pc = eq.puntos = 0);
 
       torneo.partidos.forEach(p => {
-        if (p.resultado) {
-          const local = torneo.equipos.find(e => e.nombre === p.local);
-          const visitante = torneo.equipos.find(e => e.nombre === p.visitante);
+        if (!p.resultado) return;
+        const localTeam = torneo.equipos.find(e => e.nombre === p.local);
+        const visitTeam = torneo.equipos.find(e => e.nombre === p.visitante);
 
-          if (local && visitante) {
-            local.pj++;
-            local.pf += p.resultado.local;
-            local.pc += p.resultado.visitante;
+        localTeam.pj++; visitTeam.pj++;
+        localTeam.pf += p.resultado.local; localTeam.pc += p.resultado.visitante;
+        visitTeam.pf += p.resultado.visitante; visitTeam.pc += p.resultado.local;
 
-            visitante.pj++;
-            visitante.pf += p.resultado.visitante;
-            visitante.pc += p.resultado.local;
-
-            if (p.resultado.local > p.resultado.visitante) {
-              local.pg++;
-              local.puntos += 3;
-              visitante.pp++;
-            } else {
-              visitante.pg++;
-              visitante.puntos += 3;
-              local.pp++;
-            }
-          }
+        if (p.resultado.local > p.resultado.visitante) {
+          localTeam.pg++; localTeam.puntos += 3; visitTeam.pp++;
+        } else {
+          visitTeam.pg++; visitTeam.puntos += 3; localTeam.pp++;
         }
       });
     }
 
     function mostrarTablaPosiciones() {
       actualizarEstadisticas();
-      
-      const tablaSorted = [...torneo.equipos].sort((a, b) => {
-        if (b.puntos !== a.puntos) return b.puntos - a.puntos;
-        return (b.pf - b.pc) - (a.pf - a.pc);
-      });
+      const sorted = [...torneo.equipos].sort((a,b) => b.puntos - a.puntos || (b.pf-b.pc)-(a.pf-a.pc));
 
       let html = "";
-      tablaSorted.forEach((eq, i) => {
-        const dif = eq.pf - eq.pc;
+      sorted.forEach((eq, i) => {
         html += `<tr>
-          <td>${i + 1}</td>
+          <td>${i+1}</td>
           <td>${eq.nombre}</td>
           <td>${eq.pj}</td>
           <td>${eq.pg}</td>
           <td>${eq.pp}</td>
           <td>${eq.pf}</td>
           <td>${eq.pc}</td>
-          <td>${dif > 0 ? '+' : ''}${dif}</td>
+          <td>${eq.pf - eq.pc}</td>
           <td><strong>${eq.puntos}</strong></td>
         </tr>`;
       });
-
       document.getElementById('bodyTabla').innerHTML = html;
-      ocultarTodasPantallas();
+      ocultarTodas();
       document.getElementById('tablaPosiciones').style.display = 'block';
-      playSound(1500, 200);
     }
 
     function volverAFixture() {
-      ocultarTodasPantallas();
+      ocultarTodas();
       document.getElementById('fixture').style.display = 'block';
-      playSound(600, 100);
+      mostrarPartidos();
     }
 
     function mostrarCargarTorneo() {
@@ -960,53 +354,31 @@
       input.type = 'file';
       input.accept = '.json';
       input.onchange = e => {
-        const file = e.target.files[0];
-        if (!file) return;
-
         const reader = new FileReader();
         reader.onload = ev => {
-          try {
-            torneo = JSON.parse(ev.target.result);
-            guardar();
-            ocultarTodasPantallas();
-            document.getElementById('fixture').style.display = 'block';
-            mostrarPartidos();
-            alert("✅ Torneo cargado correctamente");
-            playSound(1500, 200);
-          } catch(error) {
-            alert("❌ Error al cargar el archivo. Asegúrate de que sea un JSON válido");
-            playSound(300, 200);
-          }
+          torneo = JSON.parse(ev.target.result);
+          guardar();
+          ocultarTodas();
+          document.getElementById('fixture').style.display = 'block';
+          mostrarPartidos();
         };
-        reader.readAsText(file);
+        reader.readAsText(e.target.files[0]);
       };
       input.click();
     }
 
     function exportarTorneo() {
-      if (torneo.equipos.length === 0) {
-        alert("❌ No hay torneo para exportar");
-        playSound(300, 200);
-        return;
-      }
       const data = JSON.stringify(torneo, null, 2);
       const blob = new Blob([data], {type: 'application/json'});
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = (torneo.nombre || "torneo") + ".json";
+      a.download = (torneo.nombre || "torneo_wally") + ".json";
       a.click();
-      URL.revokeObjectURL(url);
-      playSound(1300, 150);
     }
 
     function reiniciarTodo() {
-      if (confirm("⚠️ ¿Borrar TODO? Esta acción no se puede deshacer")) {
-        localStorage.removeItem('torneoWally');
-        torneo = { nombre: "", equipos: [], partidos: [] };
-        playSound(200, 300);
-        location.reload();
-      }
+      if (confirm("¿Borrar todo el torneo?")) location.reload();
     }
   </script>
 </body>
